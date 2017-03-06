@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 # allow setup.py to be run from any path
 # os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
-__version__ = '0.1.4'
+__version__ = '0.1.0'
 __description__ = 'Liberia de Trotamundia para Django',
 __license__ = 'BSD'
 __author__ = 'Juan Ortiz',
@@ -15,7 +15,7 @@ __email__ = 'juan.ortiz@trotamundia.com',
 
 
 setup(
-    name='trotamundia',
+    name='trotamundiaCore',
     version=__version__,
     packages=find_packages(),
     include_package_data=True,
