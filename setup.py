@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 # REQUIRES = [i.strip() for i in open("requirements.txt").readlines()]
 
 # allow setup.py to be run from any path
-os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+# os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 __version__ = '0.1.4'
 __description__ = 'Liberia de Trotamundia para Django',
