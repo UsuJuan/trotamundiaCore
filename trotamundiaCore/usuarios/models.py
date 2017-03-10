@@ -93,6 +93,13 @@ class Permission(document.Document):
         return (self.codename,) + self.content_type.natural_key()
     natural_key.dependencies = ['contenttypes.contenttype']
 
+class Provider(document.EmbeddedDocument):
+    uid = fields.StringField()
+    display_name = fields.StringField(blank=True)
+    photo_url = fields.URLField(blank=True)
+    email = fields.EmailField(blank=False)
+    provider_id = fields.StringField(blank=False)
+
 class User(document.Document):
     SEXO_HOMBRE = 'masculino'
     SEXO_MUJER = 'femenino'
@@ -106,14 +113,15 @@ class User(document.Document):
         at http://docs.djangoproject.com/en/dev/topics/auth/#users
         """
     username = fields.StringField(
-        max_length=30, verbose_name=('username'),
-        help_text=("Required. 30 characters or fewer. Letters, numbers and @/./+/-/_ characters"),)
+        max_length=250, verbose_name=('username'),
+        help_text=("Required. 250 characters or fewer. Letters, numbers and @/./+/-/_ characters"), required=False)
     first_name = fields.StringField(
-        max_length=30, blank=True, verbose_name=('first name'),)
+        max_length=250, blank=True, verbose_name=('first name'),)
     last_name = fields.StringField(
-        max_length=30, blank=True, verbose_name=('last name'))
-    email = fields.EmailField(verbose_name=('e-mail address'), blank=True)
+        max_length=250, blank=True, verbose_name=('last name'))
+    email = fields.EmailField(verbose_name=('e-mail address'), blank=False)
     password = fields.StringField(
+        blank=True,
         max_length=128,
         verbose_name=('password'),
         help_text=(
@@ -148,6 +156,10 @@ class User(document.Document):
     youtube_channel = fields.URLField(blank=True)
     genere = fields.StringField(choices=SEXOS, required=False,blank=True)
     is_complete = fields.BooleanField(default=False)
+    providers = fields.ListField(fields.EmbeddedDocumentField('Provider'), blank=True)
+    photo_url = fields.URLField(blank=True)
+    uid = fields.StringField(blank=False, required=True)
+    display_name = fields.StringField(blank=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
